@@ -89,8 +89,7 @@ template <uint64_t P, std::size_t N> constexpr std::array<Fp<P>, N + 1> first_ir
 namespace detail
 {
 
-template <uint64_t Q, FixedString Name, uint64_t P = prime_power(Q).first,
-          uint64_t N = prime_power(Q).second>
+template <uint64_t Q, FixedString Name, uint64_t P = prime_power(Q).first, uint64_t N = prime_power(Q).second>
 struct GaloisField
 {
     static_assert(P != 0, "a finite field with q elements exists iff q is a prime power");
@@ -192,8 +191,7 @@ namespace detail
 {
 
 template <FiniteField K>
-void print_table(std::ostream& os, std::string_view symbol,
-                 const std::function<K(const K&, const K&)>& op)
+void print_table(std::ostream& os, std::string_view symbol, const std::function<K(const K&, const K&)>& op)
 {
     const std::vector<K> elements = all_elements<K>();
     std::vector<std::string> names;
@@ -203,9 +201,7 @@ void print_table(std::ostream& os, std::string_view symbol,
         names.push_back(to_string(e));
         width = std::max(width, display_width(names.back()));
     }
-    auto cell = [&](std::string_view s) {
-        os << std::string(width - display_width(s) + 1, ' ') << s << ' ';
-    };
+    auto cell = [&](std::string_view s) { os << std::string(width - display_width(s) + 1, ' ') << s << ' '; };
 
     cell(symbol);
     os << '|';
@@ -213,8 +209,7 @@ void print_table(std::ostream& os, std::string_view symbol,
     {
         cell(name);
     }
-    os << '\n' << std::string(width + 2, '-') << '+'
-       << std::string((width + 2) * names.size(), '-') << '\n';
+    os << '\n' << std::string(width + 2, '-') << '+' << std::string((width + 2) * names.size(), '-') << '\n';
     for (const K& a : elements)
     {
         cell(to_string(a));

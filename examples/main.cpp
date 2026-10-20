@@ -20,8 +20,7 @@ void complex_numbers()
     std::cout << "conj(" << z << ") = " << conjugate(z) << ", norm = " << norm(z) << '\n';
 
     const Complex v = -1 + i;
-    std::cout << "|" << v << "| = " << abs(v) << ", arg = " << arg(v) / std::numbers::pi
-              << " pi\n";
+    std::cout << "|" << v << "| = " << abs(v) << ", arg = " << arg(v) / std::numbers::pi << " pi\n";
     std::cout << "(" << v << ")^2 = " << pow(v, 2) << '\n';
     std::cout << "from_polar(1, pi/2) = " << from_polar<Complex>(1, std::numbers::pi / 2) << "\n\n";
 }
@@ -44,8 +43,8 @@ void field_f8()
     {
         std::cout << "β^" << k << " = " << pow(b, k) << '\n';
     }
-    std::cout << "β^-1 = " << pow(b, -1) << ", (β^2)^-1 = " << 1 / (b * b)
-              << ", (β + 1)^-1 = " << 1 / (b + 1) << "\n\n";
+    std::cout << "β^-1 = " << pow(b, -1) << ", (β^2)^-1 = " << 1 / (b * b) << ", (β + 1)^-1 = " << 1 / (b + 1)
+              << "\n\n";
 }
 
 void field_f9()
@@ -55,8 +54,8 @@ void field_f9()
     std::cout << "ι^2 = " << i * i << '\n';
     std::cout << "(1 + ι)^3 = " << pow(1 + i, 3) << '\n';
     std::cout << "1 / (1 + ι) = " << 1 / (1 + i) << '\n';
-    std::cout << "order of ι = " << multiplicative_order(i)
-              << ", primitive element: " << primitive_element<F9>() << "\n\n";
+    std::cout << "order of ι = " << multiplicative_order(i) << ", primitive element: " << primitive_element<F9>()
+              << "\n\n";
 }
 
 void galois_fields()
@@ -71,8 +70,8 @@ void galois_fields()
     // F16 as a tower over F4, the modulus has a coefficient α in F4
     using F16 = Extension<F4, poly<F4>(F4::generator(), 1, 1), "γ">;
     const F16 g = F16::generator();
-    std::cout << "F16 = " << field_name<F16>() << ": γ^2 = " << g * g
-              << ", 1/γ = " << 1 / g << ", |F16| = " << F16::cardinality << '\n';
+    std::cout << "F16 = " << field_name<F16>() << ": γ^2 = " << g * g << ", 1/γ = " << 1 / g
+              << ", |F16| = " << F16::cardinality << '\n';
 
     std::cout << "irreducible polynomials of degree 4 over F2:";
     for (const auto& f : irreducible_polynomials<F2>(4))

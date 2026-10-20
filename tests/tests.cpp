@@ -8,14 +8,14 @@ using namespace fields;
 
 static int failures = 0;
 
-#define CHECK(cond)                                                                      \
-    do                                                                                   \
-    {                                                                                    \
-        if (!(cond))                                                                     \
-        {                                                                                \
-            std::cerr << __FILE__ << ":" << __LINE__ << ": CHECK failed: " #cond "\n";   \
-            failures++;                                                                  \
-        }                                                                                \
+#define CHECK(cond)                                                                                                    \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if (!(cond))                                                                                                   \
+        {                                                                                                              \
+            std::cerr << __FILE__ << ":" << __LINE__ << ": CHECK failed: " #cond "\n";                                 \
+            failures++;                                                                                                \
+        }                                                                                                              \
     } while (0)
 
 // ----------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ static_assert(is_irreducible(Polynomial<Real>{1, 0, 1}));
 static_assert(!is_irreducible(Polynomial<Real>{-2, 0, 1}));
 static_assert(!is_irreducible(Polynomial<Real>{1, 0, 2, 0, 1})); // (X^2 + 1)^2
 static_assert(is_irreducible(Polynomial<F2>{1, 1, 1}));
-static_assert(!is_irreducible(Polynomial<F2>{1, 0, 1})); // (X + 1)^2
+static_assert(!is_irreducible(Polynomial<F2>{1, 0, 1}));   // (X + 1)^2
 static_assert(is_irreducible(Polynomial<F3>{1, 2, 0, 1})); // X^3 - X + 1 (isk 2.12)
 static_assert(is_irreducible(Polynomial<Q>{-2, 0, 1}));
 static_assert(!is_irreducible(Polynomial<Q>{-4, 11, 2, 3})); // root 1/3 (isk 2.12)

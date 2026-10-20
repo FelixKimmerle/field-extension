@@ -62,18 +62,17 @@ struct FieldTraits<K>
 // A field in the sense of isk 2.3: a set with +, -, *, / (not by 0) and 0 != 1.
 // K(n) has to be n * 1_K for integers n.
 template <typename K>
-concept Field = std::regular<K> && std::constructible_from<K, int> &&
-                requires(const K a, const K b, std::ostream& os) {
-                    { a + b } -> std::convertible_to<K>;
-                    { a - b } -> std::convertible_to<K>;
-                    { a * b } -> std::convertible_to<K>;
-                    { a / b } -> std::convertible_to<K>;
-                    { -a } -> std::convertible_to<K>;
-                    { os << a } -> std::convertible_to<std::ostream&>;
-                    { FieldTraits<K>::characteristic } -> std::convertible_to<uint64_t>;
-                    { FieldTraits<K>::cardinality } -> std::convertible_to<uint64_t>;
-                    { FieldTraits<K>::algebraically_closed } -> std::convertible_to<bool>;
-                };
+concept Field = std::regular<K> && std::constructible_from<K, int> && requires(const K a, const K b, std::ostream& os) {
+    { a + b } -> std::convertible_to<K>;
+    { a - b } -> std::convertible_to<K>;
+    { a * b } -> std::convertible_to<K>;
+    { a / b } -> std::convertible_to<K>;
+    { -a } -> std::convertible_to<K>;
+    { os << a } -> std::convertible_to<std::ostream&>;
+    { FieldTraits<K>::characteristic } -> std::convertible_to<uint64_t>;
+    { FieldTraits<K>::cardinality } -> std::convertible_to<uint64_t>;
+    { FieldTraits<K>::algebraically_closed } -> std::convertible_to<bool>;
+};
 
 template <typename K> inline constexpr bool is_finite_field_v = FieldTraits<K>::cardinality != 0;
 
@@ -147,8 +146,7 @@ inline std::size_t display_width(std::string_view s)
 
 // prints the sum of c * var^k for the given (c, k) pairs in the given order
 template <Field K>
-void print_terms(std::ostream& os, const std::vector<std::pair<K, std::size_t>>& terms,
-                 std::string_view var)
+void print_terms(std::ostream& os, const std::vector<std::pair<K, std::size_t>>& terms, std::string_view var)
 {
     bool first = true;
     for (const auto& [c, k] : terms)

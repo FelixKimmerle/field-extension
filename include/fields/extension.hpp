@@ -23,8 +23,7 @@ template <typename A, typename K> struct is_coefficient_array : std::false_type
 {
 };
 
-template <typename K, std::size_t N>
-struct is_coefficient_array<std::array<K, N>, K> : std::bool_constant<(N >= 2)>
+template <typename K, std::size_t N> struct is_coefficient_array<std::array<K, N>, K> : std::bool_constant<(N >= 2)>
 {
 };
 
@@ -61,8 +60,7 @@ struct Extension
 {
     using Base = K;
 
-    static constexpr std::size_t degree =
-        std::tuple_size_v<std::remove_cvref_t<decltype(Modulus)>> - 1;
+    static constexpr std::size_t degree = std::tuple_size_v<std::remove_cvref_t<decltype(Modulus)>> - 1;
 
     static_assert(Modulus[degree] != K(0), "the leading coefficient of the modulus must not be 0");
 

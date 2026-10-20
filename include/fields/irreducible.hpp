@@ -137,8 +137,7 @@ template <Field K> constexpr Irreducibility check_irreducible(const Polynomial<K
         // degree 2 and 3: irreducible iff there is no root (isk 2.5)
         if (n <= 3)
         {
-            return detail::has_rational_root(f) ? Irreducibility::Reducible
-                                                : Irreducibility::Irreducible;
+            return detail::has_rational_root(f) ? Irreducibility::Reducible : Irreducibility::Irreducible;
         }
         return Irreducibility::Unknown;
     }

@@ -16,8 +16,8 @@ concept QuadraticExtension = Field<E> && requires {
 
 // R[X]/(X^2 + 1) (isk 2.7, 2.12)
 template <typename E>
-concept ComplexField = QuadraticExtension<E> && std::same_as<typename E::Base, double> &&
-                       (E::modulus == std::array<double, 3>{1, 0, 1});
+concept ComplexField =
+    QuadraticExtension<E> && std::same_as<typename E::Base, double> && (E::modulus == std::array<double, 3>{1, 0, 1});
 
 // Conjugation of a quadratic extension: the other root of f = X^2 + a_1 X + a_0 is
 // x' = -a_1 - x, so a + bx -> (a - b a_1) - bx.
