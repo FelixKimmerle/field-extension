@@ -113,6 +113,12 @@ template <Field K> constexpr K pow(K base, int64_t exponent)
 namespace detail
 {
 
+// R and Q have a meaningful sign; finite fields and extensions never do,
+// even if they get an ordering (eigen.hpp adds one for pivoting)
+template <typename K>
+inline constexpr bool has_sign_v = std::totally_ordered<K> && FieldTraits<K>::characteristic == 0 &&
+                                   !requires { typename K::Base; };
+
 constexpr uint64_t checked_pow(uint64_t base, uint64_t exponent)
 {
     if (base == 0)
@@ -156,10 +162,9 @@ void print_terms(std::ostream& os, const std::vector<std::pair<K, std::size_t>>&
             continue;
         }
 
-        // only ordered fields (R, Q) have a meaningful sign
         K coeff = c;
         bool negative = false;
-        if constexpr (std::totally_ordered<K>)
+        if constexpr (has_sign_v<K>)
         {
             if (coeff < K(0))
             {
